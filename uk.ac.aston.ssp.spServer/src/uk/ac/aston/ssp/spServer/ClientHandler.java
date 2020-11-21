@@ -16,14 +16,26 @@ public class ClientHandler extends Thread {
 	private PrintWriter out;
 	public String serverResponse;
 	
-	
+	/**
+	 * ClientHandler constructor
+	 * 
+	 * @param clientSocket is passed by the Server once a client connection is made
+	 * @throws IOException
+	 */
 	public ClientHandler(Socket clientSocket) throws IOException{
 		
 		this.client = clientSocket;
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		out = new PrintWriter(client.getOutputStream());
 	}
-
+	
+	/**
+	 * This method acts as a single Thread for each client, When the server accepts a client connection
+	 * the server will call the ClientHandler class which will run this method.
+	 * <p>
+	 * This method reads in the client request and creates a server acknowledgement response
+	 * which is then sent to the client.
+	 */
 	@Override
 	public void run() {
 		

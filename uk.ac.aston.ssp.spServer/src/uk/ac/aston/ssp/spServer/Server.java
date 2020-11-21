@@ -5,7 +5,7 @@ import java.net.*;
 import java.io.*;
 
 /**
- * This class listens for client connections to accept and then pass to the ClientHandler
+ * This class listens for client connections to accept and then pass it to the ClientHandler
  * 
  * @author Blue Legion
  * 
@@ -48,8 +48,11 @@ public class Server {
 		}	
 
 	}
-	/*
-	 * generateClientID() Method to randomly generate a unique identifier for each client.
+	/**
+	 * This method generates a unique client identifier, checks value with "clientList"
+	 * Hashmap to ensure the ID is unique to each client
+	 * 
+	 * @return Double clientID
 	 */
 	public static double generateClientID() {
 		double clientID = Math.random();
@@ -60,10 +63,11 @@ public class Server {
 		return clientID;
 	}
 	
-	/*
+
+	/**
 	 * 
+	 * @return Hashmap of the current connected client's List
 	 */
-	
 	public static HashMap<Double, ClientHandler> getClientList() {
 		
 		return clientList;
