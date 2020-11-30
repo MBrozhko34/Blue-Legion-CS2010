@@ -16,6 +16,6 @@ public class DesktopLauncher {
 		config.width=1000;
 		//locks the frame rate
 		config.foregroundFPS=30;
-		new LwjglApplication(new CombatUI(), config);
+		new LwjglApplication(new CombatUI("goblin","goblin"), config);
 	}
 }
