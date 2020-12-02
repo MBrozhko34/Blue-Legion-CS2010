@@ -17,7 +17,6 @@ public class Client {
 	private static Client clientID;
 	
 	public static void main(String[] args) throws IOException{
-	
 		try(
 				
 		Socket socket = new Socket(SERVER_IP, SERVER_PORT);

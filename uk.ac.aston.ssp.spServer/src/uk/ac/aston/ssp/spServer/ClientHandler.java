@@ -14,7 +14,6 @@ public class ClientHandler extends Thread {
 	private BufferedReader in;
 	private PrintWriter out;
 	
-	
 	/**
 	 * ClientHandler constructor
 	 * 
@@ -53,7 +52,6 @@ public class ClientHandler extends Thread {
 				System.err.println(e.getStackTrace());
 					
 				}
-		
 
 		}
 	
