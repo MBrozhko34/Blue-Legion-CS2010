@@ -22,18 +22,30 @@ public class CombatUI extends ApplicationAdapter implements UI
 	private Player player2;
 	private String random1;
 	private ShapeRenderer shape;
+	private Texture logo;
+	private String p1;
+	private String p2;
+	private Background backgroundBuild;
+	private Texture background;
+	private Effect effect;
 	
+	public CombatUI(String player1Char,String player2Char) {this.p1=player1Char;
+	this.p2=player2Char;
+	this.backgroundBuild=new Background();
+	this.effect=new Effect();
+	}
+	
+	//takes the two players characters as paramaters and creates the relevant assets
 	//@Override
 	public void create() {
 		batch=new SpriteBatch();
 		font=new BitmapFont();
 		shape=new ShapeRenderer();
+		this.background=backgroundBuild.getBackground("grave");
+		logo=new Texture("bin\\main\\logo.png");
 		//creates the first player
 		try {
-			//					|
-			//fun fact:        \|/ = Kung Lou (MK) - can't use cause copyright
-			//				    v
-			player1=new Player("lungKou");
+			player1=new Player(this.p1);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -43,7 +55,7 @@ public class CombatUI extends ApplicationAdapter implements UI
 		
 		//Creates the second player
 		try {
-			player2=new Player("lungKou");
+			player2=new Player(this.p2);
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
@@ -57,6 +69,42 @@ public class CombatUI extends ApplicationAdapter implements UI
 		Gdx.gl.glClearColor(.25f, .25f, .25f, 1);
 		Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 		
+		//begins drawing things onto the screen
+		batch.begin();
+		//puts the bakcdrop onto the screen
+		batch.draw(this.background,0,0,Gdx.graphics.getWidth(),Gdx.graphics.getHeight());
+		//Draws the logo for Blue legion on the screen
+		batch.draw(this.logo,Gdx.graphics.getWidth()/2-100,Gdx.graphics.getHeight()-250,200,200);
+		//putting player 1's details onto the screen:
+		//name
+		font.draw(batch, player1.getName(), 150, Gdx.graphics.getHeight()-100);
+		//health
+		font.draw(batch,"health:"+Integer.toString(player1.getHealth()),150,Gdx.graphics.getHeight()-150);
+		//sprite
+		batch.draw(player1.getSprite(),100, Gdx.graphics.getHeight()/4+100,200,200);
+		//block card
+		//-----------
+		//block command
+		font.draw(batch,"Block",Gdx.graphics.getWidth()/16,Gdx.graphics.getHeight()/4 );
+		//action 1 card
+		//-------
+		//action 1 command
+		font.draw(batch, player1.getActions()[0],Gdx.graphics.getWidth()/16+110,Gdx.graphics.getHeight()/4);
+		//action 2 card
+		//----------
+		//action 2 command
+		font.draw(batch, this.random1,Gdx.graphics.getWidth()/16+220,Gdx.graphics.getHeight()/4);
+		//putting player 2's details onto the screen
+		//name
+		font.draw(batch, "Dummy", Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight()-100);
+		//health
+		font.draw(batch, "Health:"+Integer.toString(player2.getHealth()), Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight()-150);
+		//sprite
+		batch.draw(player2.getSprite(),Gdx.graphics.getWidth()-300,Gdx.graphics.getHeight()/4+100,200,200);
+		//stops drawing things on the screen
+		batch.end();
+		
+		/*
 		//begins drawing shapes onto the screen (high-level OpenGL)
 		shape.begin(ShapeRenderer.ShapeType.Line);
 		shape.setColor(255,255,255,1);
@@ -67,32 +115,7 @@ public class CombatUI extends ApplicationAdapter implements UI
 		//box for action 3
 		shape.rect(Gdx.graphics.getWidth()/16+220, 150, 100, Gdx.graphics.getHeight()/4-80);
 		shape.end();
-		//begins drawing things onto the screen
-		batch.begin();
-		//Draws the words Blue legion onto the screen
-		font.draw(batch, "Blue Legion", Gdx.graphics.getWidth()/2, Gdx.graphics.getHeight()-100);
-		//putting player 1's details onto the screen:
-		//name
-		font.draw(batch, player1.getName(), 150, Gdx.graphics.getHeight()-100);
-		//health
-		font.draw(batch,"health:"+Integer.toString(player1.getHealth()),150,Gdx.graphics.getHeight()-150);
-		//sprite
-		batch.draw(player1.getSprite(),100, Gdx.graphics.getHeight()/4+100);
-		//block command
-		font.draw(batch,"Block",Gdx.graphics.getWidth()/16,Gdx.graphics.getHeight()/4 );
-		//action 1 command
-		font.draw(batch, player1.getActions()[0],Gdx.graphics.getWidth()/16+110,Gdx.graphics.getHeight()/4);
-		//action 2 command
-		font.draw(batch, this.random1,Gdx.graphics.getWidth()/16+220,Gdx.graphics.getHeight()/4);
-		//putting player 2's details onto the screen
-		//name
-		font.draw(batch, "Dummy", Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight()-100);
-		//health
-		font.draw(batch, "Health:"+Integer.toString(player2.getHealth()), Gdx.graphics.getWidth()-150, Gdx.graphics.getHeight()-150);
-		//sprite
-		batch.draw(player2.getSprite(),Gdx.graphics.getWidth()-300,Gdx.graphics.getHeight()/4+100);
-		//stops drawing things on the screen
-		batch.end();
+		*/
 		
 		//checks if the user has clicked the screen
 		if (Gdx.input.isButtonJustPressed(Buttons.LEFT)) {
