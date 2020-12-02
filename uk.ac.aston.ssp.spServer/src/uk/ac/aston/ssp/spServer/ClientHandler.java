@@ -51,8 +51,6 @@ public class ClientHandler extends Thread {
 				System.err.println("IO exception in client handler");
 				System.err.println(e.getStackTrace());
 					
-				}
-
+			}
 		}
-	
 }

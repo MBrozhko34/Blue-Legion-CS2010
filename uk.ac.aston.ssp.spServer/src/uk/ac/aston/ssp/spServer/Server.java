@@ -47,7 +47,6 @@ public class Server {
 			System.out.println();
 		
 		}	
-
 	}
 	/**
 	 * This method generates a unique client identifier, checks value with "clientList"
