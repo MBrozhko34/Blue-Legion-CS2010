@@ -33,7 +33,6 @@ public class Client {
 		System.out.println("INTER USER INPUT");
 		String userInput = stdIn.readLine();
 		String serverResponse;
-		//Reads Server's response
 		
 		while(userInput != null) {
 			
