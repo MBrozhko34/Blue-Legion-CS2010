@@ -19,7 +19,6 @@ public class Server {
 	 */
 
 	private static final int SERVER_PORT = 43221;
-	
 	/*
 	 * HashMap that the Server uses to store each client and their associated clientID
 	 */

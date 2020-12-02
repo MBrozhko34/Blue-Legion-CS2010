@@ -11,7 +11,6 @@ public class Client {
 	 * localhost address since the server is running on the same machine. The Port refers
 	 * to the manually set PORT in the SERVER class.
 	 */
-	
 	private static final String SERVER_IP = "127.0.0.1";
 	private static final int SERVER_PORT = 43221;
 	

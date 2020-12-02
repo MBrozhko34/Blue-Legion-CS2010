@@ -8,7 +8,6 @@ import java.util.*;
 	 * "ClientHandler" class is responsible for initiating dedicated threads to each client connections
 	 * Once the client sends a request the server will send a ACK response.
 	 */
-
 public class ClientHandler extends Thread {
 	
 	private Socket client;
