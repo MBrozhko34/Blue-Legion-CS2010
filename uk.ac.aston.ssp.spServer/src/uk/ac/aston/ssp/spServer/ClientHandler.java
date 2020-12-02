@@ -23,7 +23,6 @@ public class ClientHandler extends Thread {
 	 * @throws IOException
 	 */
 	public ClientHandler(Socket clientSocket) throws IOException{
-		
 		this.client = clientSocket;
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		out = new PrintWriter(client.getOutputStream(), true);
