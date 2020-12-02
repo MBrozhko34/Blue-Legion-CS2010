@@ -18,11 +18,9 @@ public class Client {
 	private static Client clientID;
 	
 	public static void main(String[] args) throws IOException{
-		// TODO Auto-generated method stub
-		
-		
-		
+	
 		try(
+				
 		Socket socket = new Socket(SERVER_IP, SERVER_PORT);
 		
 		PrintWriter out = new PrintWriter(socket.getOutputStream(), true);
@@ -33,15 +31,20 @@ public class Client {
 			
 		//Reads userInput
 		System.out.println("INTER USER INPUT");
-		String userInput;
+		String userInput = stdIn.readLine();
+		String serverResponse;
 		//Reads Server's response
 		
-		while((userInput = stdIn.readLine()) != null) {
+		while(userInput != null) {
+			
+			System.out.println("request: " + userInput);
 			//Sends out client request
 			out.println(userInput);
-			
 			//Prints Server's response
-			System.out.println("SERVER RESPONSE: "+ in.readLine());
+			serverResponse = in.readLine();
+			System.out.println(serverResponse);
+			System.out.println();
+			userInput = stdIn.readLine();
 			
 			}
 		

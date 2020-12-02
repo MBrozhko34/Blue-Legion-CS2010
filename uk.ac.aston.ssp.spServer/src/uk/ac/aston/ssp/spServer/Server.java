@@ -32,18 +32,19 @@ public class Server {
 		
 		System.out.println("[SERVER] Waiting for client connections... ");
 		
-		while(true) {
+		while(true){
 			
 			// Server accepts client connection
 			Socket clientSocket = listener.accept();
 			System.out.println("[SERVER] Connected to client ");
 			
 			//ClientHandler object is created to create a separate thread for the client.
+			new ClientHandler(clientSocket).start();
 			ClientHandler clientThread = new ClientHandler(clientSocket);
-			clientThread.start();
-			
+		
 			clientList.put(generateClientID(), clientThread);
 			System.out.println("Client List: " + getClientList());
+			System.out.println();
 		
 		}	
 

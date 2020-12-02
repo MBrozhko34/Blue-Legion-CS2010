@@ -14,7 +14,7 @@ public class ClientHandler extends Thread {
 	private Socket client;
 	private BufferedReader in;
 	private PrintWriter out;
-	public String serverResponse;
+	
 	
 	/**
 	 * ClientHandler constructor
@@ -26,7 +26,7 @@ public class ClientHandler extends Thread {
 		
 		this.client = clientSocket;
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
-		out = new PrintWriter(client.getOutputStream());
+		out = new PrintWriter(client.getOutputStream(), true);
 	}
 	
 	/**
@@ -36,32 +36,27 @@ public class ClientHandler extends Thread {
 	 * This method reads in the client request and creates a server acknowledgement response
 	 * which is then sent to the client.
 	 */
+	
 	@Override
 	public void run() {
 		
-		System.out.println("Launching new Thread for Client[" + client + "]");
-		
-		while(true) {
-			
-		try {
-	
-			String clientRequest = in.readLine();
-			
-			String serverResponse = "[SERVER]: Client request " + "[" + clientRequest + "]" + " recieved!";
-					
-			out.println(serverResponse);
+			try {
+				System.out.println("Launching new Thread for Client[" + client + "]");
+				
+				while(true){
+				
+					String clientRequest = in.readLine();						
+					out.println("[SERVER]: Client request " + clientRequest + " recieved");
+				}
 
-	
-		}catch(IOException e) {
-			
-			System.err.println("IO exception in client handler");
-			System.err.println(e.getStackTrace());
+			}catch(IOException e) {
+					
+				System.err.println("IO exception in client handler");
+				System.err.println(e.getStackTrace());
+					
+				}
 		
-			
+
 		}
-		
-		}
-		
-	}
 	
 }
