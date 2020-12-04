@@ -12,11 +12,9 @@ import java.io.*;
  * @since November 2020
  */
 public class Server {
-
 	/*
 	 * Manually initialising the SERVER PORT NUMBER
 	 */
-
 	private static final int SERVER_PORT = 43221;
 	
 	/*
@@ -37,14 +35,17 @@ public class Server {
 			Socket clientSocket = listener.accept();
 			System.out.println("[SERVER] Connected to client ");
 			
+			
+			Double clientID = generateClientID();
 			//ClientHandler object is created to create a separate thread for the client.
-			new ClientHandler(clientSocket).start();
-			ClientHandler clientThread = new ClientHandler(clientSocket);
-		
-			clientList.put(generateClientID(), clientThread);
+			new ClientHandler(clientSocket, clientID).start();
+			ClientHandler clientThread = new ClientHandler(clientSocket, clientID);
+			
+			//Connected Client is added to the client list
+			clientList.put(clientID, clientThread);
 			System.out.println("Client List: " + getClientList());
 			System.out.println();
-		
+
 		}	
 	}
 	/**
@@ -71,6 +72,10 @@ public class Server {
 		
 		return clientList;
 	}
+	
+	
+	
+	
 	
 	
 

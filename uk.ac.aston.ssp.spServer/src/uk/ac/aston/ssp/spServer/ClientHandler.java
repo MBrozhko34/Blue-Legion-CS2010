@@ -13,6 +13,9 @@ public class ClientHandler extends Thread {
 	private Socket client;
 	private BufferedReader in;
 	private PrintWriter out;
+	private Server server;
+	private Double clientID;
+	
 	
 	/**
 	 * ClientHandler constructor
@@ -20,8 +23,9 @@ public class ClientHandler extends Thread {
 	 * @param clientSocket is passed by the Server once a client connection is made
 	 * @throws IOException
 	 */
-	public ClientHandler(Socket clientSocket) throws IOException{
+	public ClientHandler(Socket clientSocket, Double clientID) throws IOException{
 		this.client = clientSocket;
+		this.clientID = clientID;
 		in = new BufferedReader(new InputStreamReader(client.getInputStream()));
 		out = new PrintWriter(client.getOutputStream(), true);
 	}
@@ -36,13 +40,28 @@ public class ClientHandler extends Thread {
 	
 	@Override
 	public void run() {
-		
+		System.out.println("Launching new Thread for Client[" + client + "]");
+		System.out.println();
 			try {
-				System.out.println("Launching new Thread for Client[" + client + "]");
+				
 				
 				while(true){
 				
-					String clientRequest = in.readLine();						
+					String clientRequest = in.readLine();
+					
+					if(clientRequest == null || clientRequest.equals("quit")){
+						client.close();
+						out.println("[SERVER]: Client connection terminated");
+						System.out.println("Client " + client + "has disconnected");
+						System.out.println();
+						
+						client.close();
+						
+						server.getClientList().remove(clientID);
+						
+						break;
+						
+					}
 					out.println("[SERVER]: Client request " + clientRequest + " recieved");
 				}
 
